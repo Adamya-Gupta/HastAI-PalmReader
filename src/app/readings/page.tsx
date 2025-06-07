@@ -80,17 +80,17 @@ export default function Readings() {
         }`}
     >
       <div
-        className="grid grid-cols-1 lg:grid-cols-3 gap-8 px-6 py-12 max-w-7xl mx-auto"
+        className="grid grid-cols-1 lg:grid-cols-2 gap-8 px-6 py-12 max-w-7xl mx-auto"
       >
         {/* Left Section */}
-        <div className="flex items-center justify-center ">
+        {/* <div className="flex items-center justify-center ">
           {mounted && theme === "dark"?
           (<Image
             src="/HandLines.png"
             alt="handimage"
             width={300}
             height={100}
-            className="rounded-xl bg-gray-300 border"
+            className="rounded-xl  border"
           />):(
             <Image
             src="/HandLines.png"
@@ -99,12 +99,10 @@ export default function Readings() {
             height={100}
             className="rounded-xl"/>
           )}
-        </div>
+        </div> */}
 
         {/* Middle Section */}
-        <div className="w-full max-w-xl mx-auto border border-dashed bg-white dark:bg-gray-900 border-neutral-200 dark:border-neutral-800 rounded-xl p-4 flex flex-col justify-center">
-          <FileUpload onChange={handleFileUpload} />
-        </div>
+       
 
         {/* Right Section */}
         <div className="sticky top-20">
@@ -130,21 +128,37 @@ export default function Readings() {
             </div>
           )}
 
-          {!loading && !aiResponse && (
-            <>
+          
             
              <div className="relative flex h-[500px] w-full flex-col items-center justify-center overflow-hidden">
                 {/* Outer Circle */}
-                <OrbitingCircles iconSize={40} className="dark:bg-teal-400">
+                <OrbitingCircles iconSize={40} className="dark:bg-teal-400" radius={230} >
                   <Icons.heart />
                   <Icons.eye />
                   <Icons.life />
                   <Icons.study />
                   <Icons.fate />
                 </OrbitingCircles>
-                <Hand />
+                {/* <Hand /> */}
+              <div className="flex items-center justify-center ">
+          {mounted && theme === "dark"?
+          (<Image
+            src="/NewLines.png"
+            alt="handimage"
+            width={250}
+            height={100}
+            className="rounded-xl "
+          />):(
+            <Image
+            src="/HandLines.png"
+            alt="handimage"
+            width={250}
+            height={100}
+            className="rounded-xl"/>
+          )}
+        </div>
                 {/* Inner Circle */}
-                <OrbitingCircles iconSize={30} radius={100} reverse speed={2} className="dark:bg-green-400 ">
+                <OrbitingCircles iconSize={30} radius={190} reverse speed={2} className="dark:bg-green-400 ">
                   <Icons.heart />
                   <Icons.fate />
                   <Icons.life />
@@ -152,13 +166,19 @@ export default function Readings() {
                 </OrbitingCircles>
               </div>
 
-            
+            {/* {!loading && !aiResponse && (
+            <>
             </>
            
-          )}
+          )} */}
+
         </div>
-      </div>
-    </div>
+           <div className="w-full max-w-xl mx-auto border border-dashed bg-white dark:bg-gray-900 border-neutral-200 dark:border-neutral-800 rounded-xl p-4 flex flex-col justify-center">
+          <FileUpload onChange={handleFileUpload} />
+        </div>
+
+      </div> {/*Grid Div*/}
+    </div> 
   );
 }
 

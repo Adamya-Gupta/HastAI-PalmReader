@@ -13,12 +13,12 @@ function Navbar() {
 
 
   return (
-    <nav className={`sticky top-0 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 z-50
+    <nav className={`top-0 w-full border-b backdrop-blur  z-50
     ${
         mounted && theme === "dark"
-          ? "bg-gradient-to-b from-gray-900 to-black text-white"
-          // : "bg-gradient-to-b from-green-100 to-green-100 text-gray-900"
-          :<></>
+          ? ("bg-gray-900 text-white")
+         
+          :("bg-stone-200 text-gray-900")
       }
     `}>
       <div className="max-w-7xl mx-auto px-4">
