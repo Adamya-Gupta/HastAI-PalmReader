@@ -114,8 +114,8 @@ function LoadingIndicator({
 }: LoadingIndicatorProps): React.JSX.Element {
   const styles: React.CSSProperties = {
     position: 'absolute',
-    top: '20px',
-    left: '20px',
+    top: '660px',
+    // left: '20px',
     color: 'white',
     fontFamily: 'Arial, sans-serif',
     fontSize: '14px',
@@ -149,14 +149,14 @@ export default function HandModel(): React.JSX.Element {
     minDistance: 1,
     maxDistance: 10,
     enablePan: false,
-    enableZoom: true,
+    enableZoom: false,
     enableRotate: true,
     autoRotate: false // Disable auto-rotate since we're handling it manually
   };
 
   return (
     <div style={containerStyles}>
-      <Canvas {...canvasProps}>
+      <Canvas {...canvasProps} className="">
         <Lighting />
        
         <Suspense fallback={null}>
