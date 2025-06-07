@@ -30,17 +30,30 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-        
+
       >
         <ThemeProvider
-            attribute="class"
-            defaultTheme="system"
-            enableSystem
-            disableTransitionOnChange
-          >
-            <Navbar/>
-            
-              {/* <main className="py-8">
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+
+
+
+          <Navbar />
+
+          <main >
+            <div>{children}</div>
+          </main>
+
+        </ThemeProvider>
+      </body>
+    </html>
+  );
+}
+
+{/* <main className="py-8">
                 
                 <div className="max-w-7xl mx-auto px-4">
                   <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
@@ -51,13 +64,3 @@ export default function RootLayout({
                   </div>
                 </div>
               </main> */}
-
-              <main>
-                <div>{children}</div>
-              </main>
-     
-          </ThemeProvider>
-      </body>
-    </html>
-  );
-}

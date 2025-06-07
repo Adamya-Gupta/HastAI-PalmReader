@@ -4,7 +4,7 @@ import Link from "next/link";
 import ThemeToggle from "./ThemeToggle";
 
 
-async function DesktopNavbar() {
+function DesktopNavbar() {
 
 
   return (

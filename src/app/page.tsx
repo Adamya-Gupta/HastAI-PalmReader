@@ -8,17 +8,21 @@ import { motion } from "framer-motion";
 
 import HandModel from "./_components/HandModel";
 import Lookup from "./data/Lookup";
+import { useEffect, useState } from "react";
 
 export default function LandingPage() {
   const { theme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
+
   const features = Lookup.features;
 
   return (
-    <main
+    <div
       className={`min-h-screen transition-colors duration-500 ${
-        theme === "dark"
+        mounted && theme === "dark"
           ? "bg-gradient-to-b from-gray-900 via-black to-gray-950 text-white"
-          : "bg-gradient-to-b from-green-100 via-white to-blue-100 text-gray-900"
+          : "bg-gradient-to-b from-purple-200 via-white to-blue-100 text-gray-900"
       }`}
     >
      
@@ -33,8 +37,8 @@ export default function LandingPage() {
             transition={{ duration: 0.8 }}
             className="text-5xl lg:text-7xl font-extrabold leading-tight tracking-tight"
           >
-            Decode Your <span className="text-green-700">Future</span> <br />
-            from Your <span className="text-yellow-400">Palm</span>
+            Decode Your <span className="text-blue-500">Future</span> <br />
+            from Your <span className="text-orange-400">Palm</span>
           </motion.h1>
 
           <p className="text-lg md:text-xl text-gray-400 max-w-xl mx-auto lg:mx-0">
@@ -47,7 +51,7 @@ export default function LandingPage() {
         </div>
 
         {/* 3D Hand */}
-        <div className="w h-[200px]">
+        <div className=" h-[450px] flex items-center xl:mr-20">
          <HandModel/>
         </div>
       </section>
@@ -90,6 +94,6 @@ export default function LandingPage() {
       <footer className="py-8 text-center text-gray-400 text-sm border-t border-gray-700/30 dark:border-gray-200/10 mt-12">
         © {new Date().getFullYear()} HastAI — All rights reserved.
       </footer>
-    </main>
+    </div>
   );
 }
