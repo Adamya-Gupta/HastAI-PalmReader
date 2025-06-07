@@ -9,6 +9,7 @@ import { motion } from "framer-motion";
 import HandModel from "./_components/HandModel";
 import Lookup from "./data/Lookup";
 import { useEffect, useState } from "react";
+import Link from "next/link";
 
 export default function LandingPage() {
   const { theme } = useTheme();
@@ -22,36 +23,38 @@ export default function LandingPage() {
       className={`min-h-screen transition-colors duration-500 ${
         mounted && theme === "dark"
           ? "bg-gradient-to-b from-gray-900 via-black to-gray-950 text-white"
-          : "bg-gradient-to-b from-purple-200 via-white to-blue-100 text-gray-900"
+          : "bg-gradient-to-b from-stone-200 via-white to-cyan-50 text-gray-900"
       }`}
     >
      
 
       {/* Hero Section */}
-      <section className="flex flex-col lg:flex-row items-center justify-between px-8 py-20 max-w-7xl mx-auto">
+      <section className="flex flex-col lg:flex-row items-center justify-between px-8 lg:py-20 max-w-7xl mx-auto ">
         {/* Text */}
-        <div className="flex-1 text-center lg:text-left mb-12 lg:mb-0 space-y-6">
+        <div className="flex-1 text-center lg:text-left md:mb-12 lg:mb-0 space-y-6">
           <motion.h1
             initial={{ opacity: 0, y: -30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
             className="text-5xl lg:text-7xl font-extrabold leading-tight tracking-tight"
           >
-            Decode Your <span className="text-blue-500">Future</span> <br />
-            from Your <span className="text-orange-400">Palm</span>
+            Decode Your <span className="text-teal-600">Future</span> <br />
+            from Your <span className="text-stone-500">Palm</span>
           </motion.h1>
 
           <p className="text-lg md:text-xl text-gray-400 max-w-xl mx-auto lg:mx-0">
             Upload your palm image and let our AI unravel mysteries of your destiny, relationships, career, and life path.
           </p>
 
-          <Button size="lg" className="mt-6">
-            Upload Your Palm
+          <Link href="/readings">
+          <Button size="lg" className="mt-6 rounded-2xl font-medium text-lg cursor-pointer">
+             Try Now
           </Button>
+          </Link>
         </div>
 
         {/* 3D Hand */}
-        <div className=" h-[450px] flex items-center xl:mr-20">
+        <div className=" h-[450px] hidden md:flex items-center xl:mr-20">
          <HandModel/>
         </div>
       </section>

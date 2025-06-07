@@ -1,14 +1,16 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { FileUpload } from "@/components/ui/file-upload";
 import Image from "next/image";
+import { useTheme } from "next-themes";
+import { OrbitingCircles } from "@/components/magicui/orbiting-circles";
+import { CircleHelp, Eye, GraduationCap, Hand, Heart, HeartPulse, Skull, Smile } from "lucide-react";
 
 
 export default function Readings() {
-
   const [files, setFiles] = useState<File[]>([]);
-  const [aiResponse, setAiResponse] = useState<any>(null); // to store the JSON response
+  const [aiResponse, setAiResponse] = useState<any>(null);
   const [loading, setLoading] = useState(false);
 
   const handleFileUpload = async (files: File[]) => {
@@ -37,43 +39,126 @@ export default function Readings() {
     }
   };
 
+  const { theme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
+
+  const headings = [
+    "Fate line",
+    "Head line",
+    "Life line",
+    "Career",
+    "Love",
+    "Future",
+    "Summary",
+  ];
+
+  const Icons = {
+   
+    eye: () => (
+      <Eye className="text-orange-600 dark:text-black"/>
+    ),
+    life: () => (
+      <HeartPulse className="text-green-600 dark:text-black" />
+    ),
+    study: () => (
+      <GraduationCap className="text-blue-600 dark:text-black"/>
+    ),
+    heart: () => (
+      <Heart className="text-red-600 dark:text-black" />
+    ),
+    fate: () => (
+      <Skull className="text-purple-600 dark:text-black"/>
+    )
+  };
+
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-10 gap-6">
-
-      {/* MIDDLe section */}
-      <div className="lg:col-span-6">
-
-        <div className=" dark:bg flex items-center justify-center rounded-xl min-h-96">
-          <Image src='/DarkLines-Photoroom.png' alt="handimage" width={300} height={100} />
+    <div
+      className={`min-h-screen ${mounted && theme === "dark"
+          ? "bg-gradient-to-b from-gray-900 via-black to-gray-950 text-white"
+          : "bg-gradient-to-b from-stone-200 via-white to-cyan-50 text-gray-900"
+        }`}
+    >
+      <div
+        className="grid grid-cols-1 lg:grid-cols-3 gap-8 px-6 py-12 max-w-7xl mx-auto"
+      >
+        {/* Left Section */}
+        <div className="flex items-center justify-center ">
+          {mounted && theme === "dark"?
+          (<Image
+            src="/HandLines.png"
+            alt="handimage"
+            width={300}
+            height={100}
+            className="rounded-xl bg-gray-300 border"
+          />):(
+            <Image
+            src="/HandLines.png"
+            alt="handimage"
+            width={300}
+            height={100}
+            className="rounded-xl"/>
+          )}
         </div>
 
-
-        <div className="w-full max-w-xl mx-auto mt-10 min-h-96 border border-dashed bg-white dark:bg-black border-neutral-200 dark:border-neutral-800 rounded-xl">
+        {/* Middle Section */}
+        <div className="w-full max-w-xl mx-auto border border-dashed bg-white dark:bg-gray-900 border-neutral-200 dark:border-neutral-800 rounded-xl p-4 flex flex-col justify-center">
           <FileUpload onChange={handleFileUpload} />
         </div>
 
+        {/* Right Section */}
+        <div className="sticky top-20">
+          {loading && (
+            <p className="text-center font-semibold text-lg">
+              Loading AI Response...
+            </p>
+          )}
+
+          {!loading && aiResponse && (
+            <div className="p-4 bg-white dark:bg-black border rounded space-y-4">
+              <h3 className="text-xl font-bold mb-4 text-center">AI Palm Reading</h3>
+              {headings.map((heading) => (
+                aiResponse[heading] && (
+                  <div key={heading} className="border-b pb-2">
+                    <h4 className="font-semibold text-lg mb-1">{heading}</h4>
+                    <p className="text-sm text-gray-700 dark:text-gray-300">
+                      {aiResponse[heading]}
+                    </p>
+                  </div>
+                )
+              ))}
+            </div>
+          )}
+
+          {!loading && !aiResponse && (
+            <>
+            
+             <div className="relative flex h-[500px] w-full flex-col items-center justify-center overflow-hidden">
+                {/* Outer Circle */}
+                <OrbitingCircles iconSize={40} className="dark:bg-teal-400">
+                  <Icons.heart />
+                  <Icons.eye />
+                  <Icons.life />
+                  <Icons.study />
+                  <Icons.fate />
+                </OrbitingCircles>
+                <Hand />
+                {/* Inner Circle */}
+                <OrbitingCircles iconSize={30} radius={100} reverse speed={2} className="dark:bg-green-400 ">
+                  <Icons.heart />
+                  <Icons.fate />
+                  <Icons.life />
+                  <Icons.study />
+                </OrbitingCircles>
+              </div>
+
+            
+            </>
+           
+          )}
+        </div>
       </div>
-
-      {/* ThIRD Section */}
-      {/* <div className="hidden lg:block lg:col-span-4 sticky top-20"> */}
-      <div className="lg:block lg:col-span-4  sticky top-20">
-
-        {loading && <p>Loading AI Response...</p>}
-
-        {!loading && aiResponse && (
-          <div className="p-4 bg-white dark:bg-black border rounded">
-            <h3 className="text-lg font-bold mb-2">AI Palm Reading:</h3>
-            <pre className="text-sm whitespace-pre-wrap">
-              {JSON.stringify(aiResponse, null, 2)}
-            </pre>
-          </div>
-        )}
-
-        {!loading && !aiResponse && <p>This is third section here AI will display users response</p>}
-
-
-      </div>
-
     </div>
   );
 }
+
