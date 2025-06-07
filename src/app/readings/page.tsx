@@ -6,16 +6,15 @@ import Image from "next/image";
 import { useTheme } from "next-themes";
 import { OrbitingCircles } from "@/components/magicui/orbiting-circles";
 import {
-  CircleHelp,
   Eye,
   GraduationCap,
-  Hand,
   Heart,
   HeartPulse,
   Skull,
-  Smile,
   Loader2,
 } from "lucide-react";
+
+import { BorderBeam } from "@/components/magicui/border-beam";
 
 export default function Readings() {
   const [files, setFiles] = useState<File[]>([]);
@@ -56,7 +55,7 @@ export default function Readings() {
   const headings = [
     "Fate line",
     "Head line",
-    "Heart line", 
+    "Heart line",
     "Life line",
     "Career",
     "Love",
@@ -74,11 +73,10 @@ export default function Readings() {
 
   return (
     <div
-      className={`min-h-screen ${
-        mounted && theme === "dark"
-          ? "bg-gradient-to-b from-gray-900 via-black to-gray-950 text-white"
-          : "bg-gradient-to-b from-stone-200 via-white to-cyan-50 text-gray-900"
-      }`}
+      className={`min-h-screen ${mounted && theme === "dark"
+        ? "bg-gradient-to-b from-gray-900 via-black to-gray-950 text-white"
+        : "bg-gradient-to-b from-stone-200 via-white to-cyan-50 text-gray-900"
+        }`}
     >
       <div className="flex flex-col items-center px-6 py-12 max-w-5xl mx-auto space-y-12">
         {/* Top section: Image + Upload side by side */}
@@ -98,14 +96,14 @@ export default function Readings() {
               <Icons.fate />
             </OrbitingCircles>
 
-            <div className="flex items-center justify-center z-10">
+            <div className="flex items-center  justify-center z-10">
               {mounted && theme === "dark" ? (
                 <Image
                   src="/NewLines.png"
                   alt="handimage"
                   width={250}
                   height={100}
-                  className="rounded-xl"
+                  className="rounded-xl max-md:w-[25vh]"
                 />
               ) : (
                 <Image
@@ -113,7 +111,7 @@ export default function Readings() {
                   alt="handimage"
                   width={250}
                   height={100}
-                  className="rounded-xl"
+                  className="rounded-xl max-md:w-[25vh]"
                 />
               )}
             </div>
@@ -152,24 +150,43 @@ export default function Readings() {
         {!loading && aiResponse && (
           <>
             <h3 className="text-2xl font-bold mb-4 text-center">Your Palm Reading</h3>
-            <div className="w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+            <div className="w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 ">
               {headings.map(
                 (heading) =>
                   aiResponse[heading] && (
                     <div
                       key={heading}
-                      className="rounded-xl border bg-stone-100 dark:bg-gray-900 border-neutral-200 dark:border-neutral-800 p-4 shadow-md"
+                      className="rounded-xl border bg-stone-100 dark:bg-gray-900 border-neutral-200 dark:border-neutral-800 p-4 shadow-md relative"
                     >
-                      <h4 className="font-bold text-lg mb-2 bg-red-300 dark:bg-teal-900 rounded-xl flex items-center justify-center">{heading}</h4>
+                      <h4 className="font-bold text-lg mb-2 bg-red-300 dark:bg-teal-400 dark:text-black rounded-xl flex items-center justify-center">{heading}</h4>
                       <p className="text-sm text-gray-900 dark:text-gray-300 font-medium">
                         {aiResponse[heading]}
                       </p>
+
+                      {mounted && theme === "dark" &&
+                      (
+                      <>
+                      <BorderBeam
+                        duration={6}
+                        size={200}
+                        className="from-transparent via-cyan-600 to-transparent"
+                      />
+                      <BorderBeam
+                        duration={6}
+                        delay={3}
+                        size={200}
+                        className="from-transparent via-stone-500 to-transparent"
+                      />
+                       </> )}
+
                     </div>
                   )
               )}
             </div>
           </>
         )}
+
+
       </div>
     </div>
   );
