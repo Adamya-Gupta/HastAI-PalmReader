@@ -29,7 +29,7 @@ export default function LandingPage() {
      
 
       {/* Hero Section */}
-      <section className="flex flex-col lg:flex-row justify-between px-8 lg:py-30 max-w-7xl mx-auto h-screen">
+      <section className="flex flex-col lg:flex-row justify-between px-8 md:py-30 max-w-7xl mx-auto md:h-screen">
         {/* Text */}
         <div className="flex-1 text-center lg:text-left md:mb-12 lg:mb-0 space-y-6">
           <motion.h1
@@ -60,7 +60,7 @@ export default function LandingPage() {
       </section>
 
       {/* Features Section */}
-      <section className="py-16">
+      <section className="">
         <div className="max-w-6xl mx-auto px-8">
           <motion.h2
             initial={{ opacity: 0, scale: 0.9 }}

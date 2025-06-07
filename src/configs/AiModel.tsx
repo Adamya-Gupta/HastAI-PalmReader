@@ -41,6 +41,7 @@ Leave scientific temperaments. Give readings about:
 - Fate line
 - Head line
 - Life line
+- Heart line
 - Career
 - Love
 - Future
@@ -55,6 +56,7 @@ IMPORTANT: Respond strictly in this exact JSON format:
   "Fate line": "...",
   "Head line": "...",
   "Life line": "...",
+  "Heart line":"...",
   "Career": "...",
   "Love": "...",
   "Future": "...",
