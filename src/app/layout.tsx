@@ -4,6 +4,7 @@ import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider"
 import Navbar from "./_components/Navbar";
 import HandModel from "./_components/HandModel";
+import Image from "next/image";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
