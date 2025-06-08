@@ -100,7 +100,7 @@ export default function Readings() {
               {mounted && theme === "dark" ? (
                 <Image
                   src="/NewLines.png"
-                  alt="handimage"
+                  alt="darkimage"
                   width={250}
                   height={100}
                   className="rounded-xl max-md:w-[25vh]"
