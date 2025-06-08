@@ -195,7 +195,7 @@
 // }
 
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import axios from "axios";
 import { FileUpload } from "@/components/ui/file-upload";
 import Image from "next/image";
@@ -231,15 +231,40 @@ export default function Readings() {
   const [aiResponse, setAiResponse] = useState<AIResponse | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [mounted, setMounted] = useState(false);
+  const [windowWidth, setWindowWidth] = useState(1024); // Default to desktop width
 
-  const handleFileUpload = async (files: File[]) => {
-    setFiles(files);
-    console.log(files);
-    if (files.length === 0) return;
+  // Theme hook with safe fallback
+  const themeHook = useTheme();
+  const theme = themeHook?.theme || 'light';
+
+  // Safe window width detection
+  useEffect(() => {
+    const handleResize = () => {
+      if (typeof window !== 'undefined') {
+        setWindowWidth(window.innerWidth);
+      }
+    };
+    
+    // Set mounted and initial width
+    setMounted(true);
+    handleResize();
+    
+    if (typeof window !== 'undefined') {
+      window.addEventListener('resize', handleResize);
+      return () => window.removeEventListener('resize', handleResize);
+    }
+  }, []);
+
+  const handleFileUpload = useCallback(async (uploadedFiles: File[]) => {
+    if (!uploadedFiles || uploadedFiles.length === 0) return;
+    
+    setFiles(uploadedFiles);
+    console.log('Files uploaded:', uploadedFiles);
 
     // Validate file type
-    const file = files[0];
-    if (!file.type.startsWith('image/')) {
+    const file = uploadedFiles[0];
+    if (!file?.type?.startsWith('image/')) {
       setError('Please upload a valid image file');
       return;
     }
@@ -256,18 +281,18 @@ export default function Readings() {
     try {
       setLoading(true);
       setError(null);
-      setAiResponse(null); // clear previous response
+      setAiResponse(null);
       
       const response = await axios.post("/api/ai-readings", formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
-        timeout: 30000, // 30 second timeout
+        timeout: 60000, // 60 second timeout
       });
 
       console.log("AI Response:", response.data);
       
-      if (response.data.error) {
+      if (response.data?.error) {
         setError(response.data.error);
         return;
       }
@@ -276,36 +301,23 @@ export default function Readings() {
     } catch (error: any) {
       console.error("Error sending file to API:", error);
       
+      let errorMessage = 'Failed to analyze palm. Please try again.';
+      
       if (error.response?.data?.error) {
-        setError(error.response.data.error);
+        errorMessage = error.response.data.error;
+      } else if (error.response?.status === 500) {
+        errorMessage = 'Server error. Please try again later.';
       } else if (error.code === 'ECONNABORTED') {
-        setError('Request timeout. Please try again.');
-      } else {
-        setError('Failed to analyze palm. Please try again.');
+        errorMessage = 'Request timeout. Please try again.';
+      } else if (error.message) {
+        errorMessage = error.message;
       }
       
+      setError(errorMessage);
       setAiResponse(null);
     } finally {
       setLoading(false);
     }
-  };
-
-  const { theme } = useTheme();
-  const [mounted, setMounted] = useState(false);
-  const [windowWidth, setWindowWidth] = useState(0);
-
-  useEffect(() => {
-    setMounted(true);
-    
-    // Set initial window width
-    const handleResize = () => {
-      setWindowWidth(window.innerWidth);
-    };
-    
-    handleResize(); // Set initial value
-    window.addEventListener('resize', handleResize);
-    
-    return () => window.removeEventListener('resize', handleResize);
   }, []);
 
   const headings = [
@@ -328,16 +340,29 @@ export default function Readings() {
   };
 
   // Safe calculations for responsive design
-  const isMobile = windowWidth > 0 && windowWidth < 768;
+  const isMobile = windowWidth < 768;
   const outerRadius = isMobile ? 150 : 220;
   const innerRadius = isMobile ? 120 : 180;
   const outerIconSize = isMobile ? 30 : 35;
   const innerIconSize = isMobile ? 20 : 30;
 
+  // Don't render until mounted to prevent hydration mismatch
+  if (!mounted) {
+    return (
+      <div className="min-h-screen bg-gradient-to-b from-stone-200 via-white to-cyan-50 text-gray-900">
+        <div className="flex flex-col items-center px-6 py-12 max-w-5xl mx-auto space-y-12">
+          <div className="flex justify-center items-center">
+            <Loader2 className="animate-spin w-8 h-8" />
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div
       className={`min-h-screen ${
-        mounted && theme === "dark"
+        theme === "dark"
           ? "bg-gradient-to-b from-gray-900 via-black to-gray-950 text-white"
           : "bg-gradient-to-b from-stone-200 via-white to-cyan-50 text-gray-900"
       }`}
@@ -348,25 +373,23 @@ export default function Readings() {
           {/* Orbiting Circles + Image */}
           <div className="relative flex w-full aspect-square flex-col items-center justify-center overflow-hidden">
             {/* Outer Ring */}
-            {mounted && (
-              <OrbitingCircles
-                iconSize={outerIconSize}
-                radius={outerRadius}
-                className="dark:bg-teal-400 items-center"
-              >
-                <Icons.heart />
-                <Icons.eye />
-                <Icons.life />
-                <Icons.study />
-                <Icons.fate />
-              </OrbitingCircles>
-            )}
+            <OrbitingCircles
+              iconSize={outerIconSize}
+              radius={outerRadius}
+              className="dark:bg-teal-400 items-center"
+            >
+              <Icons.heart />
+              <Icons.eye />
+              <Icons.life />
+              <Icons.study />
+              <Icons.fate />
+            </OrbitingCircles>
 
             <div className="flex items-center justify-center z-10">
-              {mounted && theme === "dark" ? (
+              {theme === "dark" ? (
                 <Image
                   src="/NewLines.png"
-                  alt="darkimage"
+                  alt="Palm reading in dark theme"
                   width={250}
                   height={100}
                   className="rounded-xl max-md:w-[25vh] w-auto h-auto"
@@ -375,7 +398,7 @@ export default function Readings() {
               ) : (
                 <Image
                   src="/HandLines.png"
-                  alt="handimage"
+                  alt="Palm reading guide"
                   width={250}
                   height={100}
                   className="rounded-xl max-md:w-[25vh] w-auto h-auto"
@@ -385,20 +408,18 @@ export default function Readings() {
             </div>
 
             {/* Inner Ring */}
-            {mounted && (
-              <OrbitingCircles
-                iconSize={innerIconSize}
-                radius={innerRadius}
-                reverse
-                speed={2}
-                className="dark:bg-green-400 items-center justify-center"
-              >
-                <Icons.heart />
-                <Icons.fate />
-                <Icons.life />
-                <Icons.study />
-              </OrbitingCircles>
-            )}
+            <OrbitingCircles
+              iconSize={innerIconSize}
+              radius={innerRadius}
+              reverse
+              speed={2}
+              className="dark:bg-green-400 items-center justify-center"
+            >
+              <Icons.heart />
+              <Icons.fate />
+              <Icons.life />
+              <Icons.study />
+            </OrbitingCircles>
           </div>
 
           {/* Upload Section */}
@@ -406,7 +427,7 @@ export default function Readings() {
             <FileUpload onChange={handleFileUpload} />
             {error && (
               <div className="mt-4 p-3 bg-red-100 dark:bg-red-900 border border-red-300 dark:border-red-700 rounded-md">
-                <p className="text-red-700 dark:text-red-300 text-sm">{error}</p>
+                <p className="text-red-700 dark:text-red-300 text-sm font-medium">{error}</p>
               </div>
             )}
           </div>
@@ -415,7 +436,7 @@ export default function Readings() {
         {/* Loading Spinner */}
         {loading && (
           <div className="flex justify-center items-center space-x-2 mt-8">
-            <Loader2 className="animate-spin w-6 h-6 text-primary" />
+            <Loader2 className="animate-spin w-6 h-6 text-blue-600" />
             <p className="text-lg font-medium">Analyzing your palm...</p>
           </div>
         )}
@@ -426,20 +447,22 @@ export default function Readings() {
             <h3 className="text-2xl font-bold mb-4 text-center">Your Palm Reading</h3>
             <div className="w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
               {headings.map((heading) => {
-                const content = aiResponse[heading];
-                return content ? (
+                const content = aiResponse?.[heading];
+                if (!content) return null;
+                
+                return (
                   <div
                     key={heading}
                     className="rounded-xl border bg-stone-100 dark:bg-gray-900 border-neutral-200 dark:border-neutral-800 p-4 shadow-md relative"
                   >
-                    <h4 className="font-bold text-lg mb-2 bg-red-300 dark:bg-teal-400 dark:text-black rounded-xl flex items-center justify-center">
+                    <h4 className="font-bold text-lg mb-2 bg-red-300 dark:bg-teal-400 dark:text-black rounded-xl flex items-center justify-center p-2">
                       {heading}
                     </h4>
                     <p className="text-sm text-gray-900 dark:text-gray-300 font-medium">
                       {content}
                     </p>
 
-                    {mounted && theme === "dark" && (
+                    {theme === "dark" && (
                       <>
                         <BorderBeam
                           duration={6}
@@ -455,7 +478,7 @@ export default function Readings() {
                       </>
                     )}
                   </div>
-                ) : null;
+                );
               })}
             </div>
           </>

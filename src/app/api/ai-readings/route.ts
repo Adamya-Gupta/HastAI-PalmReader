@@ -28,14 +28,8 @@
 import { NextResponse } from 'next/server';
 import { generateReadingFromBase64 } from '@/configs/AiModel';
 
-export const config = {
-  api: {
-    bodyParser: true,
-    sizeLimit: '5mb',
-  },
-  runtime: 'nodejs', // Ensure Node.js runtime
-  maxDuration: 30, // 30 seconds timeout
-};
+// Remove the config export as it might be causing issues in deployment
+// Vercel handles these configurations automatically
 
 export async function POST(req: Request) {
   try {
