@@ -18,6 +18,14 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "HastAI",
   description: "Palm reading website, created by Adamya Gupta",
+  icons: {
+        icon: [
+            {
+                url: "/hand-metal.svg", 
+                href: "/hand-metal.svg", 
+            },
+        ],
+    },
 };
 
 export default function RootLayout({
