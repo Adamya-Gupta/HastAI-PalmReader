@@ -186,7 +186,7 @@ export default function Readings() {
   ];
 
   const Icons = {
-    eye: () => <Eye className="text-orange-600 dark:text-black" />,
+    eye: () => <Eye className="text-orange-600 dark:text-black " />,
     life: () => <HeartPulse className="text-green-600 dark:text-black" />,
     study: () => <GraduationCap className="text-blue-600 dark:text-black" />,
     heart: () => <Heart className="text-red-600 dark:text-black" />,
@@ -250,7 +250,7 @@ export default function Readings() {
                   alt="darkimage"
                   width={250}
                   height={100}
-                  className="rounded-xl max-md:w-[25vh] w-65 h-auto"
+                  className="rounded-xl max-sm:w-[22vh] max-md:w-[25vh] w-65 h-auto "
                   priority={true}
                 />
               ) : (
@@ -259,7 +259,7 @@ export default function Readings() {
                   alt="handimage"
                   width={250}
                   height={100}
-                  className="rounded-xl max-md:w-[25vh] w-65 h-auto"
+                  className="rounded-xl max-sm:w-[22vh] max-md:w-[25vh] w-65 h-auto"
                   priority={true}
                 />
               )}
@@ -267,11 +267,11 @@ export default function Readings() {
 
             {/* Inner Ring */}
             <OrbitingCircles
-              iconSize={mounted ? (window.innerWidth < 768 ? 20 : 30) : 30}
+              iconSize={mounted ? (window.innerWidth < 768 ? 25 : 30) : 30}
               radius={mounted ? (window.innerWidth < 768 ? 120 : 180) : 180}
               reverse
               speed={2}
-              className="dark:bg-green-400 items-center justify-center"
+              className="dark:bg-green-400 items-center justify-center "
             >
               <Icons.heart />
               <Icons.fate />
@@ -443,7 +443,7 @@ export default function Readings() {
                         <div className={`absolute inset-0 rounded-2xl bg-gradient-to-br ${details.gradient} opacity-0 group-hover:opacity-[0.02] transition-opacity duration-300 pointer-events-none`} />
                         
                         {/* Border beam effects for dark theme */}
-                        {mounted && theme === "dark" && (
+                        {/* {mounted && theme === "dark" && (
                           
                            
                             <BorderBeam
@@ -453,7 +453,7 @@ export default function Readings() {
                               className="from-transparent via-cyan-500/100 to-transparent "
                             />
                         
-                        )}
+                        )} */}
                       </CardContent>
                     </Card>
                   </motion.div>

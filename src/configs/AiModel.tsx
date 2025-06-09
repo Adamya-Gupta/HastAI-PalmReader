@@ -1,8 +1,8 @@
 import { GoogleGenAI } from "@google/genai";
 
-  const ai = new GoogleGenAI({
-    apiKey: process.env.GEMINI_API_KEY,
-  });
+const ai = new GoogleGenAI({
+  apiKey: process.env.GEMINI_API_KEY,
+});
 
 
 function extractJson(text: string) {
@@ -18,7 +18,7 @@ function extractJson(text: string) {
 export async function generateReadingFromBase64(base64Image: string) {
   const config = {
     thinkingConfig: {
-      thinkingBudget: 0,
+      thinkingBudget: 8000,
     },
     responseMimeType: "text/plain",
   };
@@ -49,6 +49,8 @@ Leave scientific temperaments. Give readings about:
 
 Give a brutally honest response.
 Also give readings according to different lines.
+In love section can tell which type of partner you can expect and at what age can you meet.
+In Career section can tell at about what time can expect success.  
 
 IMPORTANT: Respond strictly in this exact JSON format:
 

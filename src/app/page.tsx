@@ -47,7 +47,7 @@ export default function LandingPage() {
       }`}
     >
       {/* Hero Section */}
-      <section className="flex flex-col lg:flex-row justify-between px-8 md:py-30 max-w-7xl mx-auto md:h-screen">
+      <section className="max-md:pt-20 flex flex-col lg:flex-row justify-between px-8 md:py-30 max-w-7xl mx-auto md:h-screen">
         {/* Text */}
         <div className="flex-1 text-center lg:text-left md:mb-12 lg:mb-0 space-y-6">
           <motion.h1
