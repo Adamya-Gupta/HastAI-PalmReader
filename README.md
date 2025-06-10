@@ -59,9 +59,19 @@ The 3D model used in this project is approximately 105 MB in size and is a `.obj
 
 >[!CAUTION]
 >While Git LFS appears to be an attractive solution for managing large files, it comes with a catch. What starts as a free service often leads to unexpected billing notifications when you exceed the generous-looking but limited free tier.
-><img src='./assets/git-lfs.png'>
-><img src='./assets/plan.png'>
 
+<div align="center">
+<table >
+<tr>
+<td align="center">
+<img src='./assets/git-lfs.png' width="1000">
+</td>
+<td align="center">
+<img src='./assets/plan.png' width="1000">
+</td>
+</tr>
+</table>
+</div>
 
 ## ⚙️Installation & Setup
 
