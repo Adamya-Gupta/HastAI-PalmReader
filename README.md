@@ -1,5 +1,6 @@
 # HastAI - Palm Reader
 [![MIT License](https://img.shields.io/badge/License-MIT-blue.svg)](https://choosealicense.com/licenses/mit/)
+![Git LFS](https://img.shields.io/badge/Git%20LFS-Enabled-orange?logo=git&logoColor=white)
 
 ## 🔍 Overview:
 HastAI provides palm reading for free to users who just want quickly want to check what their palm says instead of going to some palm reader.
@@ -30,28 +31,30 @@ Light Mode
 - 3d Model Rendering - [Threejs](https://threejs.org)
 - Model Storing - [Git-LFS](https://git-lfs.com/)
 
->[!IMPORTANT]
->### Git Large File Storage(LFS) ![Git LFS](https://img.shields.io/badge/Git%20LFS-Enabled-orange?logo=git&logoColor=white)
+
+### Git Large File Storage(LFS) 
 
 Git Large File Storage (LFS) replaces large files such as audio samples, videos, datasets, and graphics with text pointers inside Git, while storing the file contents on a remote server like GitHub.com or GitHub Enterprise.
 
 The 3D model used in this project is approximately 105 MB in size and is a .obj file. Since GitHub only allows storing files up to 100 MB, we had to use Git LFS.
 
-While pushing the model to Git LFS, you might encounter some issues. If you face similar problems, you can solve them using the following solutions:
-
-### Issue 1: Remote "origin" does not support the LFS locking API.
-**Solution:** 
-First, type this command in terminal, then push your code again.
-```bash
-git config lfs.locksverify false
-```
-REFERENCE - [#2812](https://github.com/desktop/desktop/issues/2812#issuecomment-332239726)
-
-### Issue 2: batch request: git@github.com: Permission denied (publickey).: exit status 255
-**Solution:**
-If you are using Windows, this is a bug in Git for Windows ([#1613](https://github.com/git-for-windows/git/issues/1613)). Push the code using Git Bash, and your issue will be resolved.
-
-REFERENCE - [#4848](https://github.com/git-lfs/git-lfs/discussions/4848)
+>[!IMPORTANT]
+>While pushing the model to Git LFS, you might encounter some issues. If you face similar problems, you can solve them using the following solutions:
+>
+>### Issue 1: Remote "origin" does not support the LFS locking API.
+>**Solution:** 
+>First, type this command in terminal, then push your code again.
+>```bash
+> git config lfs.locksverify false
+> ```
+>
+>REFERENCE - [#2812](https://github.com/desktop/desktop/issues/2812#issuecomment-332239726)
+>
+>### Issue 2: batch request: git@github.com: Permission denied (publickey).: exit status 255
+>**Solution:**
+>If you are using Windows, this is a bug in Git for Windows ([#1613](https://github.com/git-for-windows/git/issues/1613)). Push the code using Git Bash, and your issue will be resolved.
+>
+>REFERENCE - [#4848](https://github.com/git-lfs/git-lfs/discussions/4848)
 
 
 ## ⚙️Installation & Setup
