@@ -221,7 +221,7 @@ export default function Readings() {
           </p>
         </motion.div>
 
-        {/* Top section: Image + Upload side by side */}
+       
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 w-full items-center">
           {/* Orbiting Circles + Image */}
           <motion.div
@@ -442,18 +442,7 @@ export default function Readings() {
                         {/* Subtle hover effect overlay - Fixed opacity and positioning */}
                         <div className={`absolute inset-0 rounded-2xl bg-gradient-to-br ${details.gradient} opacity-0 group-hover:opacity-[0.02] transition-opacity duration-300 pointer-events-none`} />
                         
-                        {/* Border beam effects for dark theme */}
-                        {/* {mounted && theme === "dark" && (
-                          
-                           
-                            <BorderBeam
-                              duration={6}
-                              delay={3}
-                              size={400}
-                              className="from-transparent via-cyan-500/100 to-transparent "
-                            />
-                        
-                        )} */}
+                  
                       </CardContent>
                     </Card>
                   </motion.div>

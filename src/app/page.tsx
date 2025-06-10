@@ -338,7 +338,7 @@ export default function LandingPage() {
             <div>
               <h3 className="text-lg font-bold mb-4">Connect</h3>
               <div className="flex space-x-4">
-                <a href="https://github.com/Adamya-Gupta/" target="_blank" rel="noopener noreferrer" className="text-gray-600 dark:text-gray-400 hover:text-teal-600 transition-colors">
+                <a href="https://github.com/Adamya-Gupta/HastAI-PalmReader" target="_blank" rel="noopener noreferrer" className="text-gray-600 dark:text-gray-400 hover:text-teal-600 transition-colors">
                  
                   <IconBrandGithub className="w-5 h-5"/>
                 </a>

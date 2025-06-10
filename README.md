@@ -1,9 +1,9 @@
 # HastAI - Palm Reader
 [![MIT License](https://img.shields.io/badge/License-MIT-blue.svg)](https://choosealicense.com/licenses/mit/)
-![Git LFS](https://img.shields.io/badge/Git%20LFS-Enabled-orange?logo=git&logoColor=white)
+[![Git LFS](https://img.shields.io/badge/Git%20LFS-Enabled-orange?logo=git&logoColor=white)](https://git-lfs.com/)
 
 ## 🔍 Overview:
-HastAI provides palm reading for free to users who just want quickly want to check what their palm says instead of going to some palm reader.
+HastAI provides free palm reading to users who want to quickly check what their palm reveals, without the need to visit a professional palm reader.
 
 <div align="center">
 <table >
@@ -36,7 +36,7 @@ Light Mode
 
 Git Large File Storage (LFS) replaces large files such as audio samples, videos, datasets, and graphics with text pointers inside Git, while storing the file contents on a remote server like GitHub.com or GitHub Enterprise.
 
-The 3D model used in this project is approximately 105 MB in size and is a .obj file. Since GitHub only allows storing files up to 100 MB, we had to use Git LFS.
+The 3D model used in this project is approximately 105 MB in size and is a `.obj` file. Since GitHub only allows storing files up to 100 MB, we had to use Git LFS.
 
 >[!IMPORTANT]
 >While pushing the model to Git LFS, you might encounter some issues. If you face similar problems, you can solve them using the following solutions:
@@ -52,7 +52,8 @@ The 3D model used in this project is approximately 105 MB in size and is a .obj 
 >
 >### Issue 2: batch request: git@github.com: Permission denied (publickey).: exit status 255
 >**Solution:**
->If you are using Windows, this is a bug in Git for Windows ([#1613](https://github.com/git-for-windows/git/issues/1613)). Push the code using Git Bash, and your issue will be resolved.
+>If you are using Windows, this is a bug in Git for Windows ([#1613](https://github.com/git-for-windows/git/issues/1613)).<br>
+>Push the code using Git Bash, and your issue will be resolved.
 >
 >REFERENCE - [#4848](https://github.com/git-lfs/git-lfs/discussions/4848)
 
