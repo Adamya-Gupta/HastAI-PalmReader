@@ -1,8 +1,83 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# HastAI - Palm Reader
+[![MIT License](https://img.shields.io/badge/License-MIT-blue.svg)](https://choosealicense.com/licenses/mit/)
 
-## Getting Started
+## 🔍 Overview:
+HastAI provides palm reading for free to users who just want quickly want to check what their palm says instead of going to some palm reader.
 
-First, run the development server:
+<div align="center">
+<table >
+<tr>
+<td align="center">
+Dark Mode
+<img src='./assets/frontdark.png'>
+</td>
+<td align="center">
+Light Mode
+<img src='./assets/frontlight.png'>
+</td>
+</tr>
+</table>
+</div>
+
+## 📌 Features
+- **Always Free to Use** - No hidden costs, no subscriptions, unlimited palm readings for everyone to enjoy
+- **Data Safety** - Your palm images are never stored, processed securely and deleted immediately after reading
+- **Fast Results** - Get your personalized palm reading in seconds with our optimized AI processing
+- **Simple Upload Process** - Just take a photo of your palm and upload, no complicated steps or technical knowledge required.
+
+## 🛠️ Technologies Used
+- Framework - [Next.js](https://nextjs.org)
+- 3d Model Rendering - [Threejs](https://threejs.org)
+- Model Storing - [Git-LFS](https://git-lfs.com/)
+
+>[!IMPORTANT]
+>### Git Large File Storage(LFS) ![Git LFS](https://img.shields.io/badge/Git%20LFS-Enabled-orange?logo=git&logoColor=white)
+
+Git Large File Storage (LFS) replaces large files such as audio samples, videos, datasets, and graphics with text pointers inside Git, while storing the file contents on a remote server like GitHub.com or GitHub Enterprise.
+
+The 3D model used in this project is approximately 105 MB in size and is a .obj file. Since GitHub only allows storing files up to 100 MB, we had to use Git LFS.
+
+While pushing the model to Git LFS, you might encounter some issues. If you face similar problems, you can solve them using the following solutions:
+
+### Issue 1: Remote "origin" does not support the LFS locking API.
+**Solution:** 
+First, type this command in terminal, then push your code again.
+```bash
+git config lfs.locksverify false
+```
+REFERENCE - [#2812](https://github.com/desktop/desktop/issues/2812#issuecomment-332239726)
+
+### Issue 2: batch request: git@github.com: Permission denied (publickey).: exit status 255
+**Solution:**
+If you are using Windows, this is a bug in Git for Windows ([#1613](https://github.com/git-for-windows/git/issues/1613)). Push the code using Git Bash, and your issue will be resolved.
+
+REFERENCE - [#4848](https://github.com/git-lfs/git-lfs/discussions/4848)
+
+
+## ⚙️Installation & Setup
+
+### Step 1: Clone the Repository
+
+```bash
+  # Clone the repository
+  git clone https://github.com/Adamya-Gupta/HastAI-PalmReader.git
+  
+```
+
+### Step 2: Install Required Dependencies
+
+```bash
+# Install dependencies
+npm install
+```
+
+### Step 3: Environment Variables
+To run this project, you will need to add the following environment variables to your .env file
+
+```
+GEMINI_API_KEY = your_api_key
+```
+### Step 4: Run the development server:
 
 ```bash
 npm run dev
@@ -18,19 +93,51 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 📁 Project Structure
 
-## Learn More
+```bash
+hastai/
+├── public/              # Static assets
+│   └── models/
+│       └── hand.obj     # 3D hand model (Git LFS)
+├── src/
+│   ├── app/             # API routes, pages, and custom components
+│   ├── components/      # Library components (MagicUI, ShadCN, etc.)
+│   ├── configs/
+│   │   └── AiModel.tsx  # AI prompt configuration
+│   └── lib/             
+├── .gitignore           # Includes .env
+├── .gitattributes       # Git LFS tracking (*.obj)
+└── .env                 # API keys
+```
 
-To learn more about Next.js, take a look at the following resources:
+## 🎨 Color Palette
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+| Color Name        | Hex Code  | 
+| ----------------- | --------  | 
+| Light Teal        | `#88BDBC` | 
+| Medium Teal       | `#254E58` | 
+| Dark Teal         | `#112D32` | 
+| Warm Brown        | `#4F4A41` | 
+| Light Brown       | `#6E6658` | 
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## 🎯 Purpose of Creating This Project
 
-## Deploy on Vercel
+HastAI was created as a fun project to explore the fascinating world of palmistry using modern AI technology. We wanted to build something entertaining that combines ancient traditions with cutting-edge machine learning.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## 🚀 Future Improvements
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Some improvements I would like to implement in the future:
+- **Live User Counter** - Display real-time visitor count on the website
+- **Real-time Camera Integration** - Instead of uploading photos from storage, users can directly face their palm in front of the camera for automatic recognition and capture
+- **Enhanced UI/UX** - Improve the overall user interface and experience
+- **Optimized 3D Model Loading** - The 3D model currently takes considerable time when deployed; implement faster rendering methods
+
+
+## 🌐 Deployment
+
+Initially, I attempted to deploy on the [Vercel](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme), but for some reason, it was blocking the Gemini API responses from the client side. Instead, I successfully deployed this project on [Render](https://render.com/).
+
+## 📚 References
+- **3d Hand Model** - [TurboSquid/nadevaynoski](https://www.turbosquid.com/3d-models/realistic-human-hand-1877742)
+- **Palm Reading basics** - [wikihow.com/Read-Palms](https://www.wikihow.com/Read-Palms)

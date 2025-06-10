@@ -46,6 +46,7 @@ export default function LandingPage() {
           : "bg-gradient-to-b from-stone-200 via-white to-cyan-50 text-gray-900"
       }`}
     >
+      
       {/* Hero Section */}
       <section className="max-md:pt-20 flex flex-col lg:flex-row justify-between px-8 md:py-30 max-w-7xl mx-auto md:h-screen">
         {/* Text */}
