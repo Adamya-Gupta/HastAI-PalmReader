@@ -113,13 +113,14 @@ hastai/
 
 ## 🎨 Color Palette
 
-| Color Name        | Hex Code  | 
-| ----------------- | --------  | 
-| Light Teal        | #88BDBC | 
-| Medium Teal       | `#254e58` | 
-| Dark Teal         | `#112D32` | 
-| Warm Brown        | `#4F4A41` | 
-| Light Brown       | `#6E6658` | 
+| Color Name        | Hex Code  | Preview |
+| ----------------- | -------- | ------- |
+| Light Teal        | `#88BDBC` | <span style="display:inline-block;width:50px;height:20px;background-color:#88BDBC;border:1px solid #000;"></span> |
+| Medium Teal       | `#254E58` | <span style="display:inline-block;width:50px;height:20px;background-color:#254E58;border:1px solid #000;"></span> |
+| Dark Teal         | `#112D32` | <span style="display:inline-block;width:50px;height:20px;background-color:#112D32;border:1px solid #000;"></span> |
+| Warm Brown        | `#4F4A41` | <span style="display:inline-block;width:50px;height:20px;background-color:#4F4A41;border:1px solid #000;"></span> |
+| Light Brown       | `#6E6658` | <span style="display:inline-block;width:50px;height:20px;background-color:#6E6658;border:1px solid #000;"></span> |
+
 
 ## 🎯 Purpose of Creating This Project
 
