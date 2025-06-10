@@ -115,8 +115,8 @@ hastai/
 
 | Color Name        | Hex Code  | 
 | ----------------- | --------  | 
-| Light Teal        | `#88BDBC` | 
-| Medium Teal       | `#254E58` | 
+| Light Teal        | #88BDBC | 
+| Medium Teal       | `#254e58` | 
 | Dark Teal         | `#112D32` | 
 | Warm Brown        | `#4F4A41` | 
 | Light Brown       | `#6E6658` | 
